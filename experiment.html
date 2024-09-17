@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .product-grid {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .product {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .product img {
+            width: 150px;
+            height: 150px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        .survey {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">Welcome to Our Shopping Website</div>
+
+    <div class="container">
+        <!-- Calibration Section -->
+        <div id="calibration-section">
+            <h2>Product Preference Questions</h2>
+            <p>Please choose the product you prefer based on the design, brand, or any other feature.</p>
+            
+            <div class="product-grid">
+                <div class="product" id="calibration-product-1">
+                    <img src="product1.png" alt="Product 1">
+                    <p><strong>Brand A</strong></p>
+                    <button onclick="selectCalibrationProduct('Product 1')">Select</button>
+                </div>
+                <div class="product" id="calibration-product-2">
+                    <img src="product2.png" alt="Product 2">
+                    <p><strong>Brand B</strong></p>
+                    <button onclick="selectCalibrationProduct('Product 2')">Select</button>
+                </div>
+                <div class="product" id="calibration-product-3">
+                    <img src="product3.png" alt="Product 3">
+                    <p><strong>Brand C</strong></p>
+                    <button onclick="selectCalibrationProduct('Product 3')">Select</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Experiment Section (Hidden initially) -->
+        <div id="experiment-section" class="hidden">
+            <h2>Choose a Product</h2>
+            <p>Please select the product you'd prefer based on appearance and label.</p>
+
+            <div class="product-grid">
+                <div class="product" id="productA">
+                    <img src="razor_women.png" alt="Razor A">
+                    <p><strong>Razor A: Pink packaging, for women</strong></p>
+                    <button onclick="selectProduct('Razor A')">Select Razor A</button>
+                </div>
+                <div class="product" id="productB">
+                    <img src="razor_men.png" alt="Razor B">
+                    <p><strong>Razor B: Blue packaging, for men</strong></p>
+                    <button onclick="selectProduct('Razor B')">Select Razor B</button>
+                </div>
+                <div class="product" id="productC">
+                    <img src="razor_unisex.png" alt="Razor C">
+                    <p><strong>Razor C: Neutral packaging, unisex</strong></p>
+                    <button onclick="selectProduct('Razor C')">Select Razor C</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Price Reveal Section (Hidden initially) -->
+        <div id="price-section" class="hidden">
+            <h2>Now See the Prices</h2>
+            <p>Would you still buy the same razor?</p>
+            
+            <div class="product-grid">
+                <div class="product">
+                    <p><strong>Razor A: $10</strong></p>
+                    <button onclick="confirmPurchase('Razor A', 10)">Yes, I'll keep Razor A</button>
+                </div>
+                <div class="product">
+                    <p><strong>Razor B: $8</strong></p>
+                    <button onclick="confirmPurchase('Razor B', 8)">Yes, I'll keep Razor B</button>
+                </div>
+                <div class="product">
+                    <p><strong>Razor C: $7</strong></p>
+                    <button onclick="confirmPurchase('Razor C', 7)">Yes, I'll keep Razor C</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Survey Section (Hidden initially) -->
+        <div id="survey-section" class="hidden">
+            <h2>Follow-up Questions</h2>
+            <p>Please answer the following questions:</p>
+
+            <form class="survey">
+                <label>Do you think the price difference is justified?</label><br>
+                <input type="radio" name="price-justified" value="Yes"> Yes
+                <input type="radio" name="price-justified" value="No"> No<br><br>
+
+                <label>What influenced your decision the most?</label><br>
+                <select name="decision-factor">
+                    <option value="Packaging">Packaging</option>
+                    <option value="Brand">Brand</option>
+                    <option value="Price">Price</option>
+                    <option value="Gender Label">Gender Label</option>
+                </select><br><br>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function selectCalibrationProduct(product) {
+            alert(product + ' selected in the calibration phase.');
+            document.getElementById('calibration-section').classList.add('hidden');
+            document.getElementById('experiment-section').classList.remove('hidden');
+        }
+
+        function selectProduct(product) {
+            alert(product + ' selected.');
+            document.getElementById('experiment-section').classList.add('hidden');
+            document.getElementById('price-section').classList.remove('hidden');
+        }
+
+        function confirmPurchase(product, price) {
+            alert('You confirmed ' + product + ' at $' + price);
+            document.getElementById('price-section').classList.add('hidden');
+            document.getElementById('survey-section').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
